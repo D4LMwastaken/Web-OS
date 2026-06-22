@@ -10,6 +10,7 @@ body {
     font-family: 'Noto Sans', sans-serif;
     background-image: url(background.jpg);
     background-size: cover;
+    color: white;
 }
 
 .class {
@@ -36,4 +37,8 @@ body {
 #welcomeheader {
     text-align: center;
     color: white
+}
+
+.topbar{
+    text-align: center;
 }

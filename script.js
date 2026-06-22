@@ -76,3 +76,35 @@ welcomeScreenClose.addEventListener("click", function (){
 welcomeScreenOpen.addEventListener("click", function(){
     openWindow(welcomeScreen);
 })
+
+function selectIcon(element){
+    element.classList.add("selected");
+    selectedIcon = element
+}
+
+function deslectIocn(element) {
+    element.classList.remove("selected");
+    selectedIcon = undefined;
+}
+
+function handleIconTap(element){
+    if (element.classList.contains("selected")){
+        deslectIocn(element);
+        openWindow(window)
+    } else {
+        selectIcon(element);
+    }
+}
+
+dragElement(document.querySelector("#desktopApps"))
+
+var chargeScreenClose = document.querySelector("#desktopApps")
+
+chargeScreenClose.addEventListener("click", closeWindow(chargeScreenClose))
+
+var biggestIndex = 1;
+
+function addWindowTapHandling(element){
+    element.addEventListener("mousedown", () => handleWindowTap(element))
+}
+
