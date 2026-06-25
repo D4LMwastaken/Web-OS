@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <body style="background-image: url('background.jpg'); background-size: cover;font-family: 'Noto Sans', sans-serif;">
+    <div style="diplay: flex; justify-content: space-between; color: white; position: absolute; width: 98%; background-color: rebeccapurple; padding: 4px; bottom: 0%; transform: (0%,-100%) ">
+        <p>D4LM OS</p>
+        <p id="timeElement">Time</p>
+        <script>
+            setInterval(function () {
+                document.querySelector("#timeElement").innerHTML = new Date().toLocaleString([], {hour: '2-digit', minute:'2-digit'});
+            }, 1000);
+        </script>
+    </div>
+    <div id="welcome" style="border: solid white; border-radius: 4px; width: fit-content; padding: 4px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); backdrop-filter: blur(4px);">
+        <p id="welcomeheader" style="color: white; text-align: center; user-select: none; cursor: grab;">Handle</p>
+        <p id="welcomeClose" style="cursor: pointer; color: white; text-align: center;">Close</p>
+        <p id="welcomeOpen" style="cursor: pointer; color: white; text-align: center">Open</p>
+        <h1 style="margin: 4px; text-align: center; color: white">Welcome to my OS!</h1>
+        <h2 style="text-align: center; color: white">Introduction</h2>
+        <div style="text-align: center"><img style="border-radius: 4px" src="icon.png"/></div>
+        <br>
+        <div style="text-align: center"><a style="color: white;" href="https://www.instagram.com/d4lmwastaken/">Instagram</a></div>
+        <h3 style="text-align: center; color: white">Hobbies</h3>
+        <menu style="color: white">
+            <li>Reading</li>
+            <li>Programming</li>
+            <li>Video Gaming</li>
+        </menu>
+    </div>
+    <script>
+        dragElement(document.getElementById("welcome"));
+
+        function dragElement(element) {
+            var initialX = 0;
+            var initialY = 0;
+            var currentX = 0;
+            var currentY = 0;
+
+            if (document.getElementById(element.id + "header")) {
+                document.getElementById(element.id + "header").onmousedown = startDragging;
+            } else {
+                element.onmousedown = startDragging;
+            }
+
+            function startDragging(e) {
+                e = e || window.event;
+                e.preventDefault();
+                initialX = e.clientX;
+                initialY = e.clientY;
+                document.onmouseup = stopDragging;
+                document.onmousemove = dragElement;
+            }
+
+            function dragElement(e) {
+                e = e || window.event;
+                e.preventDefault();
+                currentX = initialX - e.clientX;
+                currentY = initialY - e.clientY;
+                initialX = e.clientX;
+                initialY = e.clientY;
+                element.style.top = (element.offsetTop - currentY) + "px";
+                element.style.left = (element.offsetLeft - currentX) + "px";
+            }
+
+            function stopDragging() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        var welcomeScreen = document.querySelector("#welcome")
+        var welcomeScreenClose = document.querySelector("#welcomeClose")
+        var welcomeScreenOpen = document.querySelector("#welcomeOpen")
+
+        function closeWindow(element) {
+            element.style.display = "none";
+        }
+
+        function openWindow(element) {
+            element.style.display = "flex"
+        }
+
+        welcomeScreenClose.addEventListener("click", function () {closeWindow(welcomeScreen)});
+
+        welcomeScreenOpen.addEventListener("click", function () {openWindow(welcomeScreen)});
+    </script>
+    </body>
+</html>
